@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 // reports endpoints - monthly and yearly
 @RestController
-@RequestMapping("/reports")
+@RequestMapping("/api/reports")
 public class ReportController {
 
     private final ReportService reportService;

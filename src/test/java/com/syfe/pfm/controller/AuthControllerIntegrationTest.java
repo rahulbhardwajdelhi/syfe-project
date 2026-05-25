@@ -37,7 +37,7 @@ class AuthControllerIntegrationTest {
         registerRequest.setFullName("Integration User");
         registerRequest.setPhoneNumber("+1234567890");
 
-        mockMvc.perform(post("/auth/register")
+        mockMvc.perform(post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(registerRequest)))
                 .andExpect(status().isCreated())
@@ -47,7 +47,7 @@ class AuthControllerIntegrationTest {
         loginRequest.setUsername(email);
         loginRequest.setPassword("password123");
 
-        MvcResult loginResult = mockMvc.perform(post("/auth/login")
+        MvcResult loginResult = mockMvc.perform(post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(loginRequest)))
                 .andExpect(status().isOk())
@@ -56,7 +56,7 @@ class AuthControllerIntegrationTest {
 
         MockHttpSession session = (MockHttpSession) loginResult.getRequest().getSession();
 
-        mockMvc.perform(get("/categories").session(session))
+        mockMvc.perform(get("/api/categories").session(session))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.categories[?(@.name=='Salary')]").exists());
     }

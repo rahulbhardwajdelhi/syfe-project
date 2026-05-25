@@ -34,12 +34,12 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable()) // api only, no html forms
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/", "/auth/register", "/auth/login", "/health").permitAll()
+                    .requestMatchers("/", "/api/routes", "/api/auth/register", "/api/auth/login", "/api/health").permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling(ex -> ex
                         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
                 .logout(logout -> logout
-                        .logoutUrl("/auth/logout")
+                        .logoutUrl("/api/auth/logout")
                         .logoutSuccessHandler((request, response, authentication) -> {
                             response.setStatus(HttpStatus.OK.value());
                             response.setContentType("application/json");

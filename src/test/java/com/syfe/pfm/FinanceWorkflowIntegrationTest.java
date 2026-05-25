@@ -33,20 +33,20 @@ class FinanceWorkflowIntegrationTest {
         String email = "workflow." + System.currentTimeMillis() + "@example.com";
         MockHttpSession session = registerAndLogin(email);
 
-        postJson(session, "/transactions", """
+        postJson(session, "/api/transactions", """
                 {"amount":5000,"date":"2024-01-10","category":"Salary","description":"Pay"}
                 """);
-        postJson(session, "/transactions", """
+        postJson(session, "/api/transactions", """
                 {"amount":1200,"date":"2024-01-12","category":"Rent","description":"Rent"}
                 """);
 
-        MvcResult goalResult = postJson(session, "/goals", """
+        MvcResult goalResult = postJson(session, "/api/goals", """
                 {"goalName":"Buffer","targetAmount":10000,"targetDate":"2027-06-01","startDate":"2024-01-01"}
                 """);
         JsonNode goal = objectMapper.readTree(goalResult.getResponse().getContentAsString());
         assertEquals(0, goal.get("currentProgress").decimalValue().compareTo(new java.math.BigDecimal("3800.00")));
 
-        MvcResult report = mockMvc.perform(get("/reports/monthly/2024/1").session(session))
+        MvcResult report = mockMvc.perform(get("/api/reports/monthly/2024/1").session(session))
                 .andExpect(status().isOk())
                 .andReturn();
         JsonNode reportJson = objectMapper.readTree(report.getResponse().getContentAsString());
@@ -55,14 +55,14 @@ class FinanceWorkflowIntegrationTest {
     }
 
     private MockHttpSession registerAndLogin(String email) throws Exception {
-        mockMvc.perform(post("/auth/register")
+        mockMvc.perform(post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {"username":"%s","password":"password123","fullName":"Test User","phoneNumber":"+1234567890"}
                                 """.formatted(email)))
                 .andExpect(status().isCreated());
 
-        MvcResult login = mockMvc.perform(post("/auth/login")
+        MvcResult login = mockMvc.perform(post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {"username":"%s","password":"password123"}

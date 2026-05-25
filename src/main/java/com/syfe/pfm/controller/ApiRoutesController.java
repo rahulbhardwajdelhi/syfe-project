@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ApiRoutesController {
 
-    @GetMapping(value = "/routes", produces = MediaType.TEXT_HTML_VALUE)
+    @GetMapping(value = "/api/routes", produces = MediaType.TEXT_HTML_VALUE)
     public String home() {
         return """
                 <!doctype html>
@@ -67,7 +67,7 @@ public class ApiRoutesController {
                     <div class="card">
                         <h1>Personal Finance Manager API</h1>
                         <p>Base path: <code>/api</code></p>
-                        <p><a href="/api/">Back to home</a></p>
+                        <p><a href="/">Back to home</a></p>
                         <p>Use <code>POST /api/auth/register</code> and <code>POST /api/auth/login</code> first. All other routes require the session cookie.</p>
 
                         <table>

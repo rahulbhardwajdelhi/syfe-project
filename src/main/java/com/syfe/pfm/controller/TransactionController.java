@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
 
 @RestController
-@RequestMapping("/transactions")
+@RequestMapping("/api/transactions")
 public class TransactionController {
 
     private final TransactionService transactionService;
