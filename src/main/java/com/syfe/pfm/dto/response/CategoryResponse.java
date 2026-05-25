@@ -1,8 +1,9 @@
 package com.syfe.pfm.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.syfe.pfm.model.CategoryType;
 
-// json field shows as "custom" not isCustom - jackson thing, tests check for custom
+// expose this as isCustom to match the assignment response examples
 public class CategoryResponse {
 
     private String name;
@@ -34,6 +35,7 @@ public class CategoryResponse {
         this.type = type;
     }
 
+    @JsonProperty("isCustom")
     public boolean isCustom() {
         return custom;
     }

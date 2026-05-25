@@ -29,8 +29,9 @@ bash financial_manager_tests.sh http://localhost:8080/api
 
 Target: **86 / 86** passed.
 
-Full submission steps → [SUBMISSION.md](SUBMISSION.md)  
-Deploy to Render → [DEPLOYMENT.md](DEPLOYMENT.md)  
+Open `http://localhost:8080/api/` to see a public page with all API routes and methods.
+
+
 Why things are built this way → [DESIGN.md](DESIGN.md)
 
 ---

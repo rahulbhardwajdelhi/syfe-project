@@ -49,13 +49,14 @@ public class TransactionController {
     public TransactionListResponse getAll(
             @RequestParam(required = false) String startDate,
             @RequestParam(required = false) String endDate,
+            @RequestParam(required = false) Long categoryId,
             @RequestParam(required = false) String category,
             @RequestParam(required = false) String type) {
         User user = authService.getCurrentUser();
         LocalDate start = parseOptionalDate(startDate, "startDate");
         LocalDate end = parseOptionalDate(endDate, "endDate");
         CategoryType categoryType = parseOptionalType(type);
-        return transactionService.getTransactions(user, start, end, category, categoryType);
+        return transactionService.getTransactions(user, start, end, categoryId, category, categoryType);
     }
 
     @PutMapping("/{id}")

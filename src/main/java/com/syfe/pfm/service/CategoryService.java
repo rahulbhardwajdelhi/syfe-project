@@ -78,6 +78,11 @@ public class CategoryService {
                 .orElseThrow(() -> new BadRequestException("Invalid category: " + name));
     }
 
+    public Category findCategoryById(User user, Long id) {
+        return categoryRepository.findByIdAndUser(id, user)
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
+    }
+
     private CategoryResponse toResponse(Category category) {
         return new CategoryResponse(category.getName(), category.getType(), category.isCustom());
     }

@@ -56,10 +56,13 @@ public class TransactionService {
             User user,
             LocalDate startDate,
             LocalDate endDate,
+            Long categoryId,
             String categoryName,
             CategoryType type) {
         Category category = null;
-        if (categoryName != null && !categoryName.isBlank()) {
+        if (categoryId != null) {
+            category = categoryService.findCategoryById(user, categoryId);
+        } else if (categoryName != null && !categoryName.isBlank()) {
             category = categoryService.findCategoryByName(user, categoryName);
         }
 

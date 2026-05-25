@@ -34,7 +34,7 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable()) // api only, no html forms
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/register", "/auth/login", "/health").permitAll()
+                    .requestMatchers("/", "/auth/register", "/auth/login", "/health").permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling(ex -> ex
                         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
