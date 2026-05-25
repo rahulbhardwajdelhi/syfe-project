@@ -141,7 +141,7 @@ public class RootController {
                         </p>
 
                         <div class="button-group">
-                            <a href="/api/" class="btn btn-primary">📚 View All API Routes</a>
+                            <a href="/api/routes" class="btn btn-primary">📚 View All API Routes</a>
                             <a href="/api/health" class="btn btn-secondary">🏥 Health Check</a>
                         </div>
 
